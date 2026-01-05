@@ -17,9 +17,21 @@
       "patterns": [
         {
           "name": "meta.attribute.alpine",
-          "match": "\\b(x-data|x-bind|x-on|x-text|x-html|x-model|x-show|x-transition|x-for|x-if|x-init|x-effect|x-ref|x-cloak|x-ignore)(?=\\s|>|/>)",
+          "match": "\\b(x-)([a-zA-Z0-9\\-_]+)(?:(\\:)([a-zA-Z\\-_]+))?(?:\\.([a-zA-Z0-9\\-_]+))*(?=\\s|>|/>)",
           "captures": {
             "1": {
+              "name": "alpinejs.directive"
+            },
+            "2": {
+              "name": "alpinejs.directive"
+            },
+            "3": {
+              "name": "alpinejs.directive"
+            },
+            "4": {
+              "name": "alpinejs.directive"
+            },
+            "5": {
               "name": "alpinejs.directive"
             }
           }

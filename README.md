@@ -4,7 +4,7 @@ JavaScript syntax highlighting for Alpine.js directives, magic properties, and m
 
 ## Features
 
-- ✅ All 15 Alpine.js directives (`x-data`, `x-bind`, `x-on`, `x-text`, `x-html`, `x-model`, `x-show`, `x-transition`, `x-for`, `x-if`, `x-init`, `x-effect`, `x-ref`, `x-cloak`, `x-ignore`)
+- ✅ **Any** `x-*` directive (including core directives and those from Alpine.js plugins like `x-mask`, `x-resize`, etc.)
 - ✅ Shorthand syntax (`@click` for `x-on:click`, `:class` for `x-bind:class`)
 - ✅ Magic properties (`$store`, `$el`, `$dispatch`, `$watch`, `$refs`, `$nextTick`)
 - ✅ Alpine methods (`Alpine.data`, `Alpine.store`)
