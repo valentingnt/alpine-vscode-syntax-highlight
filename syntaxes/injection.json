@@ -1,103 +1,385 @@
 {
-    "scopeName": "html.alpinejs.attribute",
-    "injectionSelector": [
-        "L:text.html.derivative",
-        "L:text.html.php",
-        "L:text.html.twig",
-        "L:source.heex"
-    ],
-    "patterns": [
-        {
-            "include": "#alpine-directives"
-        }
-    ],
-    "repository": {
-        "alpine-directives": {
-            "name": "meta.attribute.alpine",
-            "begin": "(?:\\b(x-)|(:|@|#))([a-zA-Z0-9\\-_]+)(?:\\:([a-zA-Z\\-_]+))?(?:\\.([a-zA-Z0-9\\-_]+))*\\s*(=)",
-            "end": "(?<='|\")|(?=[\\s<>`])",
-            "captures": {
-                "1": {
-                    "name": "entity.other.attribute-name.html"
-                },
-                "2": {
-                    "name": "punctuation.separator.key-value.html"
-                },
-                "3": {
-                    "name": "entity.other.attribute-name.html"
-                },
-                "4": {
-                    "name": "entity.other.attribute-name.html"
-                },
-                "5": {
-                    "name": "entity.other.attribute-name.html"
-                },
-                "6": {
-                    "name": "punctuation.separator.key-value.html"
-                }
-            },
-            "patterns": [
-                {
-                    "contentName": "meta.embedded.inline.alpinejs",
-                    "begin": "`",
-                    "beginCaptures": {
-                        "0": {
-                            "name": "punctuation.definition.string.begin.html"
-                        }
-                    },
-                    "end": "`",
-                    "endCaptures": {
-                        "0": {
-                            "name": "punctuation.definition.string.end.html"
-                        }
-                    },
-                    "patterns": [
-                        {
-                            "include": "source.js#expression"
-                        }
-                    ]
-                },
-                {
-                    "contentName": "meta.embedded.inline.alpinejs",
-                    "begin": "\"",
-                    "beginCaptures": {
-                        "0": {
-                            "name": "punctuation.definition.string.begin.html"
-                        }
-                    },
-                    "end": "\"",
-                    "endCaptures": {
-                        "0": {
-                            "name": "punctuation.definition.string.end.html"
-                        }
-                    },
-                    "patterns": [
-                        {
-                            "include": "source.js#expression"
-                        }
-                    ]
-                },
-                {
-                    "contentName": "meta.embedded.inline.alpinejs",
-                    "begin": "'",
-                    "beginCaptures": {
-                        "0": {
-                            "name": "punctuation.definition.string.begin.html"
-                        }
-                    },
-                    "end": "'",
-                    "endCaptures": {
-                        "0": {
-                            "name": "punctuation.definition.string.end.html"
-                        }
-                    },
-                    "patterns": [
-                        {
-                            "include": "source.js#expression"
-                        }
-                    ]
-                }
-            ]
-        }
+  "scopeName": "html.alpinejs.attribute",
+  "injectionSelector": [
+    "L:text.html.derivative",
+    "L:text.html.php",
+    "L:text.html.twig",
+    "L:text.html.liquid",
+    "L:source.heex"
+  ],
+  "patterns": [
+    {
+      "include": "#alpine-directives"
     }
+  ],
+  "repository": {
+    "alpine-directives": {
+      "patterns": [
+        {
+          "name": "meta.attribute.alpine",
+          "match": "\\b(x-data|x-bind|x-on|x-text|x-html|x-model|x-show|x-transition|x-for|x-if|x-init|x-effect|x-ref|x-cloak|x-ignore)(?=\\s|>|/>)",
+          "captures": {
+            "1": {
+              "name": "alpinejs.directive"
+            }
+          }
+        },
+        {
+          "name": "meta.attribute.alpine",
+          "begin": "\\b(x-)([a-zA-Z0-9\\-_]+)(?:(\\:)([a-zA-Z\\-_]+))?(?:\\.([a-zA-Z0-9\\-_]+))*\\s*(=)",
+          "end": "(?<='|\")|(?=[\\s<>`])",
+          "captures": {
+            "1": {
+              "name": "alpinejs.directive"
+            },
+            "2": {
+              "name": "alpinejs.directive"
+            },
+            "3": {
+              "name": "alpinejs.directive"
+            },
+            "4": {
+              "name": "alpinejs.directive"
+            },
+            "5": {
+              "name": "alpinejs.directive"
+            },
+            "6": {
+              "name": "punctuation.separator.key-value.html"
+            }
+          },
+          "patterns": [
+            {
+              "contentName": "meta.embedded.inline.alpinejs",
+              "begin": "`",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.begin.html"
+                }
+              },
+              "end": "`",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.end.html"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "source.js#expression"
+                },
+                {
+                  "include": "#alpine-magic-properties"
+                },
+                {
+                  "include": "#alpine-methods"
+                }
+              ]
+            },
+            {
+              "contentName": "meta.embedded.inline.alpinejs",
+              "begin": "\"",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.begin.html"
+                }
+              },
+              "end": "\"",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.end.html"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "source.js#expression"
+                },
+                {
+                  "include": "#alpine-magic-properties"
+                },
+                {
+                  "include": "#alpine-methods"
+                }
+              ]
+            },
+            {
+              "contentName": "meta.embedded.inline.alpinejs",
+              "begin": "'",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.begin.html"
+                }
+              },
+              "end": "'",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.end.html"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "source.js#expression"
+                },
+                {
+                  "include": "#alpine-magic-properties"
+                },
+                {
+                  "include": "#alpine-methods"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "meta.attribute.alpine",
+          "begin": "(@)([a-zA-Z0-9\\-_]+)(?:(\\:)([a-zA-Z\\-_]+))?(?:\\.([a-zA-Z0-9\\-_]+))*\\s*(=)",
+          "end": "(?<='|\")|(?=[\\s<>`])",
+          "captures": {
+            "1": {
+              "name": "alpinejs.directive"
+            },
+            "2": {
+              "name": "alpinejs.directive"
+            },
+            "3": {
+              "name": "alpinejs.directive"
+            },
+            "4": {
+              "name": "alpinejs.directive"
+            },
+            "5": {
+              "name": "alpinejs.directive"
+            },
+            "6": {
+              "name": "punctuation.separator.key-value.html"
+            }
+          },
+          "patterns": [
+            {
+              "contentName": "meta.embedded.inline.alpinejs",
+              "begin": "`",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.begin.html"
+                }
+              },
+              "end": "`",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.end.html"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "source.js#expression"
+                },
+                {
+                  "include": "#alpine-magic-properties"
+                },
+                {
+                  "include": "#alpine-methods"
+                }
+              ]
+            },
+            {
+              "contentName": "meta.embedded.inline.alpinejs",
+              "begin": "\"",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.begin.html"
+                }
+              },
+              "end": "\"",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.end.html"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "source.js#expression"
+                },
+                {
+                  "include": "#alpine-magic-properties"
+                },
+                {
+                  "include": "#alpine-methods"
+                }
+              ]
+            },
+            {
+              "contentName": "meta.embedded.inline.alpinejs",
+              "begin": "'",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.begin.html"
+                }
+              },
+              "end": "'",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.end.html"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "source.js#expression"
+                },
+                {
+                  "include": "#alpine-magic-properties"
+                },
+                {
+                  "include": "#alpine-methods"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "meta.attribute.alpine",
+          "begin": "(:)([a-zA-Z0-9\\-_]+)(?:(\\:)([a-zA-Z\\-_]+))?(?:\\.([a-zA-Z0-9\\-_]+))*\\s*(=)",
+          "end": "(?<='|\")|(?=[\\s<>`])",
+          "captures": {
+            "1": {
+              "name": "alpinejs.directive"
+            },
+            "2": {
+              "name": "alpinejs.directive"
+            },
+            "3": {
+              "name": "alpinejs.directive"
+            },
+            "4": {
+              "name": "alpinejs.directive"
+            },
+            "5": {
+              "name": "alpinejs.directive"
+            },
+            "6": {
+              "name": "punctuation.separator.key-value.html"
+            }
+          },
+          "patterns": [
+            {
+              "contentName": "meta.embedded.inline.alpinejs",
+              "begin": "`",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.begin.html"
+                }
+              },
+              "end": "`",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.end.html"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "source.js#expression"
+                },
+                {
+                  "include": "#alpine-magic-properties"
+                },
+                {
+                  "include": "#alpine-methods"
+                }
+              ]
+            },
+            {
+              "contentName": "meta.embedded.inline.alpinejs",
+              "begin": "\"",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.begin.html"
+                }
+              },
+              "end": "\"",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.end.html"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "source.js#expression"
+                },
+                {
+                  "include": "#alpine-magic-properties"
+                },
+                {
+                  "include": "#alpine-methods"
+                }
+              ]
+            },
+            {
+              "contentName": "meta.embedded.inline.alpinejs",
+              "begin": "'",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.begin.html"
+                }
+              },
+              "end": "'",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.end.html"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "source.js#expression"
+                },
+                {
+                  "include": "#alpine-magic-properties"
+                },
+                {
+                  "include": "#alpine-methods"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "meta.attribute.alpine",
+          "match": "(@)([a-zA-Z0-9\\-_]+)(?=\\s|>|/>)(?!\\s*=)",
+          "captures": {
+            "1": {
+              "name": "alpinejs.directive"
+            },
+            "2": {
+              "name": "alpinejs.directive"
+            }
+          }
+        },
+        {
+          "name": "meta.attribute.alpine",
+          "match": "(:)([a-zA-Z0-9\\-_]+)(?=\\s|>|/>)(?!\\s*=)",
+          "captures": {
+            "1": {
+              "name": "alpinejs.directive"
+            },
+            "2": {
+              "name": "alpinejs.directive"
+            }
+          }
+        }
+      ],
+      "alpine-magic-properties": {
+        "patterns": [
+          {
+            "match": "\\$\\b(store|el|dispatch|watch|refs|nextTick)\\b",
+            "name": "variable.other.property.alpinejs"
+          }
+        ]
+      },
+      "alpine-methods": {
+        "patterns": [
+          {
+            "match": "\\bAlpine\\.(data|store)\\b",
+            "name": "entity.name.function.alpinejs"
+          }
+        ]
+      }
+    }
+  }
 }

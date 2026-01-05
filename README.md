@@ -1,14 +1,80 @@
-# alpine-syntax-highlight
+# Alpine.js Syntax Highlight
 
-Javascript syntax highlighting for x- attribute values in html, php, twig, heex for [Alpine JS](https://alpinejs.dev/)
+JavaScript syntax highlighting for Alpine.js directives, magic properties, and methods in HTML, PHP, Twig, Liquid, and HEEX files.
 
-## Supported Files
+## Features
 
-html
-php
-twig
-heex
+- ✅ All 15 Alpine.js directives (`x-data`, `x-bind`, `x-on`, `x-text`, `x-html`, `x-model`, `x-show`, `x-transition`, `x-for`, `x-if`, `x-init`, `x-effect`, `x-ref`, `x-cloak`, `x-ignore`)
+- ✅ Shorthand syntax (`@click` for `x-on:click`, `:class` for `x-bind:class`)
+- ✅ Magic properties (`$store`, `$el`, `$dispatch`, `$watch`, `$refs`, `$nextTick`)
+- ✅ Alpine methods (`Alpine.data`, `Alpine.store`)
+- ✅ JavaScript expressions inside attribute values
 
-## Credit
+## Setup
 
-Added heex support to the [original](https://marketplace.visualstudio.com/items?itemName=sperovita.alpinejs-syntax-highlight), which is based off of textmate syntaxes from [Vetur](https://github.com/vuejs/vetur)
+To apply the custom color `#48A9C1` (cyan) to Alpine.js syntax, add this to your VS Code `settings.json`:
+
+**File → Preferences → Settings → Open Settings (JSON)**
+
+```json
+{
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "alpinejs.directive",
+        "settings": {
+          "foreground": "#48A9C1"
+        }
+      },
+      {
+        "scope": "meta.attribute.alpine alpinejs.directive",
+        "settings": {
+          "foreground": "#48A9C1"
+        }
+      },
+      {
+        "scope": "variable.other.property.alpinejs",
+        "settings": {
+          "foreground": "#48A9C1"
+        }
+      },
+      {
+        "scope": "meta.embedded.inline.alpinejs variable.other.property.alpinejs",
+        "settings": {
+          "foreground": "#48A9C1"
+        }
+      },
+      {
+        "scope": "entity.name.function.alpinejs",
+        "settings": {
+          "foreground": "#48A9C1"
+        }
+      },
+      {
+        "scope": "meta.embedded.inline.alpinejs entity.name.function.alpinejs",
+        "settings": {
+          "foreground": "#48A9C1"
+        }
+      }
+    ]
+  }
+}
+```
+
+Reload VS Code and you're done!
+
+## Customizing the Color
+
+Want a different color? Just change `#48A9C1` to any hex color in the settings above.
+
+## Troubleshooting
+
+If highlighting isn't working:
+
+1. Make sure you've added the settings above to `settings.json`
+2. Reload VS Code: `Cmd+Shift+P` → "Developer: Reload Window"
+3. Use Scope Inspector to verify: `Cmd+Shift+P` → "Developer: Inspect Editor Tokens and Scopes"
+
+## Credits
+
+Based on the [original extension](https://marketplace.visualstudio.com/items?itemName=sperovita.alpinejs-syntax-highlight) with added support for Liquid templates and enhanced highlighting for all Alpine.js features.
